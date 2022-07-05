@@ -1,0 +1,156 @@
+using System;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+
+
+class Solution
+{
+
+    static void printGrid(int[,] grid)
+    {
+        for (int y = 0; y < grid.GetLength(0); y++)
+        {
+            for (int x = 0; x < grid.GetLength(1); x++)
+            {
+                Console.Write("{0} ", grid[x, y]);
+            }
+            Console.WriteLine();
+
+        }
+    }
+
+    static bool verifyHorizontal(int[,] grid)           //Horizonale Prüfung
+    {
+        int checksumme = 0;
+
+        List<int> geseheneZahlen = new List<int>();
+
+        for (int y = 0; y < grid.GetLength(0); y++)
+        {
+            checksumme = 0;
+            geseheneZahlen.Clear();
+
+            for (int x = 0; x < grid.GetLength(1); x++)
+            {
+                checksumme = checksumme + grid[x, y];
+
+
+                if (geseheneZahlen.Contains(grid[x, y]))
+                {
+                    return false;
+                }
+                geseheneZahlen.Add(grid[x, y]);
+
+            }
+            if (checksumme != 45)
+            {
+                return false;
+            }
+
+        }
+        return true;
+
+    }
+
+
+    static bool verifyVertical(int[,] grid)             //Vertikale Prüfung
+    {
+        int checksumme = 0;
+
+        List<int> geseheneZahlen = new List<int>();
+
+        for (int x = 0; x < grid.GetLength(1); x++)
+        {
+            checksumme = 0;
+            geseheneZahlen.Clear();
+
+            for (int y = 0; y < grid.GetLength(0); y++)
+            {
+                checksumme = checksumme + grid[x, y];
+
+                if (geseheneZahlen.Contains(grid[x, y]))
+                {
+                    return false;               // ? zu früher ausstieg ?
+                }
+                geseheneZahlen.Add(grid[x, y]);
+
+            }
+            if (checksumme != 45)
+            {
+                return false;
+            }
+
+        }
+        return true;
+
+    }
+
+    static bool verifySubgrid(int[,] grid)                  //Subgrid Prüfung
+    {
+        int checksumme = 0;
+        List<int> geseheneZahlen = new List<int>();
+
+        for (int yOffset = 0; yOffset < 3; yOffset++)
+        {
+
+            for (int xOffset = 0; xOffset < 3; xOffset++)
+            {
+
+                checksumme = 0;
+
+                for (int y = 0; y < 3; y++)
+                {
+
+                    for (int x = 0; x < 3; x++)
+                    {
+
+                        checksumme = checksumme + grid[x + xOffset * 3, y + yOffset * 3];
+                    }
+
+                }
+                if (checksumme != 45)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+
+
+    static int[,] getGrid()
+    {
+        int[,] grid = new int[9, 9];
+        for (int y = 0; y < 9; y++)
+        {
+            string[] inputs = Console.ReadLine().Split(' ');
+            for (int x = 0; x < 9; x++)
+            {
+                int n = int.Parse(inputs[x]);
+                grid[x, y] = n;
+            }
+        }
+        return grid;
+    }
+
+    public static void Main(string[] args)
+    {
+        int[,] grid = getGrid();
+
+        if (verifyHorizontal(grid) && verifyVertical(grid) && verifySubgrid(grid))
+        {
+            Console.WriteLine("true");
+        }
+        else
+        {
+            Console.WriteLine("false");
+        }
+
+    }
+
+}
