@@ -4,6 +4,35 @@ For the grid to be correct, each row must contain one occurrence of each digit (
 and each sub-grid must contain one occurrence of each digit (1 to 9).
 You shall answer true if the grid is correct or false if it is no
 
+
+
+Input
+9 rows of 9 space-separated digits representing the sudoku grid.
+
+Output
+true or false
+
+Constraints
+For each digit n in the grid: 1 ≤ n ≤ 9.
+
+-----------------------------------------------------------------
+Example
+
+Input
+1 2 3 4 5 6 7 8 9
+4 5 6 7 8 9 1 2 3
+7 8 9 1 2 3 4 5 6
+9 1 2 3 4 5 6 7 8
+3 4 5 6 7 8 9 1 2
+6 7 8 9 1 2 3 4 5
+8 9 1 2 3 4 5 6 7
+2 3 4 5 6 7 8 9 1
+5 6 7 8 9 1 2 3 4
+
+Output
+true
+-----------------------------------------------------------------
+
 Aufgabenstellung Übersetzt:
 Sie erhalten von einem Spieler ein Sudoku-Gitter und müssen überprüfen, ob es richtig ausgefüllt wurde.
 Ein Sudoku-Gitter besteht aus 9×9 = 81 Zellen, die in 9 Untergitter von 3×3 = 9 Zellen aufgeteilt sind.
